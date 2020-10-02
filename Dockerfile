@@ -15,10 +15,11 @@ sysctl -p
 
 COPY wg0.conf /etc/wireguard/wg0.conf
 COPY install-module install-module
+COPY entrypoint.sh entrypoint.sh
 
 RUN \
 echo "**** start wireguard ****" 
 # && \
 # wg-quick up wg0
 EXPOSE 51820/udp
-ENTRYPOINT [ "wg-quick","up","wg0"]
+ENTRYPOINT [ "/bin/bash","entrypoint.sh"]
