@@ -21,4 +21,4 @@ echo "**** start wireguard ****"
 # && \
 # wg-quick up wg0
 EXPOSE 51820/udp
-CMD [ "wg-quick","up","wg0"]
+ENTRYPOINT [ "wg-quick","up","wg0"]
