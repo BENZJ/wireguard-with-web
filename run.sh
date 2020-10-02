@@ -7,8 +7,9 @@ docker run          --cap-add=NET_ADMIN \
 
 docker rm wireguardinit
 
-docker run -it -P --cap-add=NET_ADMIN \
+docker run -it -d --cap-add=NET_ADMIN \
                     --cap-add=SYS_MODULE \
                     --name=wireguard \
                     -v /lib/modules:/lib/modules \
-                    mywireguard /bin/bash
+                    -v config:/etc/wireguard \
+                    mywireguard 
