@@ -3,5 +3,11 @@ Address = 192.168.2.1/24
 SaveConfig = true
 PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
-ListenPort = 51820    #这里是公网机器打开的监听端口
-PrivateKey = mB6JNkqAnjBX+JG6dGxLb9jQU0jb06nzMmBlHy+xVVU= 
+ListenPort = 51820  
+PrivateKey = xxxxxxxxxxxxxxx
+
+
+[Peer]
+PublicKey = xxxxxxxxxxxxxxx
+AllowedIPs = 192.168.2.2/32 
+Endpoint = 218.75.123.186:39055

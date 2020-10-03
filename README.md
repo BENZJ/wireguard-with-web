@@ -15,14 +15,23 @@
 ```bash
 # build
 docker build -t mywireguard .
-docker run -it -P --cap-add=NET_ADMIN \
+
+
+#$PWD/config: 来挂载本地的wg0.conf文件实行配置
+docker run -it -d --cap-add=NET_ADMIN \
                     --cap-add=SYS_MODULE \
-                    -e PUID=1000 \
-                    -e PGID=1000 \
                     --name=wireguard \
-                    # -v  /usr/src:/usr/src \
+                    -p 23333:51820/udp \
                     -v /lib/modules:/lib/modules \
-                    mywireguard /bin/bash
+                    -v $PWD/config:/etc/wireguard \
+                    mywireguard  
 ```
 
 # 版本
+## 1.0.0
+- 实现了最基本的wireguard用docker进行安装
+# To Do
+- 把所有文件都是用统一的shell脚本进行启动
+- 添加日志
+- 添加重启
+- 添加查看操作
