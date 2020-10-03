@@ -13,7 +13,7 @@ apt install  -y --no-install-recommends \
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf  &&\
 sysctl -p 
 
-COPY wg0.conf /etc/wireguard/wg0.conf
+# COPY wg0.conf /etc/wireguard/wg0.conf
 COPY install-module install-module
 COPY entrypoint.sh entrypoint.sh
 

@@ -1,7 +1,9 @@
 # Docker Wireguard
-想要创建一个wireguard一键部署脚本
+想要创建一个wireguard一键部署脚本,实现wireguard服务器端的搭建。
 # 运行说明
 进过尝试发现wirguard需要调用到系统内核模块，安装的时候必须修改使用到/lib/modules文件。参考[cmulk/wireguard-docker](https://github.com/cmulk/wireguard-docker)首次运行的时候执行脚本，来对内核模块进行修改
+# 运行环境
+在[vultr](https://my.vultr.com/)搭建的ubuntu：16.04环境中测试成功
 # 文件说明
 ```bash
 .
