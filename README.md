@@ -17,6 +17,18 @@
 docker build -t mywireguard .
 
 
+#如果是第一次运行需要修改系统内核，所以先执行init
+docker run          --cap-add=NET_ADMIN \
+                    --cap-add=SYS_MODULE \
+                    --name=wireguardinit \
+                    -v  /usr/src:/usr/src \
+                    -v /lib/modules:/lib/modules \
+                    mywireguard /bin/bash
+
+#执行完毕后删除刚才的初始化容器
+docker rm wireguardinit
+
+#创建并启动容器
 #$PWD/config: 来挂载本地的wg0.conf文件实行配置
 docker run -it -d --cap-add=NET_ADMIN \
                     --cap-add=SYS_MODULE \
