@@ -12,7 +12,6 @@ apt install  -y --no-install-recommends \
         net-tools  && \
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf  &&\
 sysctl -p &&\
-
 echo "**** install golang ****" && \
 wget https://golang.org/dl/go1.15.2.linux-amd64.tar.gz &&\
 tar -C /usr/local -xzf go1.15.2.linux-amd64.tar.gz &&\
@@ -20,11 +19,9 @@ mkdir /root/go && \
 export GOPATH=/root/go && \
 export PATH=$PATH:/usr/local/go/bin && \
 export PATH=$PATH:$GOPATH/bi && \
-
 echo "**** install revel ****" && \
 go get github.com/revel/revel && \
 go get github.com/revel/cmd/revel && \
-
 echo "**** install webconfig ****" && \
 git clone https://github.com/BENZJ/Web_Wireguard_config && \
 revel package Web_Wireguard_config && \
