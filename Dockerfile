@@ -25,10 +25,10 @@ echo "**** install revel ****" && \
 go get github.com/revel/revel && \
 go get github.com/revel/cmd/revel && \
 echo "**** install webconfig ****" && \
-git clone https://github.com/BENZJ/Web_Wireguard_config && \
-revel package Web_Wireguard_config && \
-mkdir wgconfig && \
-tar -zxvf ./Web_Wireguard_config/Web_Wireguard_config.tar.gz  -C ./wgconfig
+git clone https://github.com/BENZJ/Web_Wireguard_config 
+# revel package Web_Wireguard_config && \
+# mkdir wgconfig && \
+# tar -zxvf ./Web_Wireguard_config/Web_Wireguard_config.tar.gz  -C ./wgconfig
 COPY install-module install-module
 COPY entrypoint.sh entrypoint.sh
 EXPOSE 51820/udp
