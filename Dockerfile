@@ -38,4 +38,4 @@ git clone https://github.com/BENZJ/Web_Wireguard_config
 
 EXPOSE 51820/udp
 EXPOSE 9000/tcp
-ENTRYPOINT ["entrypoint.sh"]
+# ENTRYPOINT ["entrypoint.sh"]
