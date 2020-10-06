@@ -13,7 +13,7 @@
 └── wg0.conf              #wireguard服务器配置文件
 
 ```
-# 运行
+# docker build 
 ```bash
 # build
 docker build -t mywireguard .
@@ -39,6 +39,62 @@ docker run -it -d --cap-add=NET_ADMIN \
                     -v /lib/modules:/lib/modules \
                     -v $PWD/config:/etc/wireguard \
                     mywireguard  
+```
+
+
+# 运行
+```bash
+
+#如果是第一次运行需要修改系统内核，所以先执行init
+docker run          --cap-add=NET_ADMIN \
+                    --cap-add=SYS_MODULE \
+                    --name=wireguardinit \
+                    -v  /usr/src:/usr/src \
+                    -v /lib/modules:/lib/modules \
+                    benzj/mywireguard /bin/bash install-module
+
+#执行完毕后删除刚才的初始化容器
+docker rm wireguardinit
+
+#创建并启动容器
+#$PWD/config: 来挂载本地的wg0.conf文件实行配置
+docker run -it -d --cap-add=NET_ADMIN \
+                    --cap-add=SYS_MODULE \
+                    --name=wireguard \
+                    -p 23333:51820/udp \
+                    -p 9999:9000/tcp \
+                    -v /lib/modules:/lib/modules \
+                    -v $PWD/config:/etc/wireguard \
+                    benzj/mywireguard     
+```
+
+# config挂载文件夹说明
+```bash
+|-- config
+|   |-- user.conf
+|   |-- wg0.conf
+```
+## user.conf
+用来存储web管理页面的用户名和密码格式如下，第一行写入用户名，第二行写入密码，例如
+```bash
+admin
+123456
+```
+## wg0.conf
+用来存储wireguard的conf文件，例如
+```bash
+[Interface]
+Address = 192.168.2.1/24
+SaveConfig = true
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+ListenPort = 51820  
+PrivateKey = xxxxxxxxxxxxxx                       #这里填入你的私钥
+
+[Peer]
+PublicKey = xxxxxxxxxxxxxxxxxxxx             #这里改成自己的公钥
+AllowedIPs = 192.168.2.2/32 
+Endpoint = xxxxxxxxxxx
 ```
 
 # 版本
