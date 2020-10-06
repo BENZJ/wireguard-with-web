@@ -1,1 +1,1 @@
-docker build -t mywireguard .
+docker build -t benzj/mywireguard .
