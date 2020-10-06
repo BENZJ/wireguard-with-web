@@ -3,7 +3,7 @@
 # 运行说明
 进过尝试发现wirguard需要调用到系统内核模块，安装的时候必须修改使用到/lib/modules文件。参考[cmulk/wireguard-docker](https://github.com/cmulk/wireguard-docker)首次运行的时候执行脚本，来对内核模块进行修改
 # 运行环境
-在[vultr](https://my.vultr.com/)搭建的ubuntu：16.04环境中测试成功
+在[vultr](https://my.vultr.com/)搭建的ubuntu：18.04环境中测试成功
 # 文件说明
 ```bash
 .
@@ -16,7 +16,7 @@
 # docker build 
 ```bash
 # build
-docker build -t mywireguard .
+docker build -t benzj/wireguard_with_webcontrol .
 
 
 #如果是第一次运行需要修改系统内核，所以先执行init
@@ -25,7 +25,7 @@ docker run          --cap-add=NET_ADMIN \
                     --name=wireguardinit \
                     -v  /usr/src:/usr/src \
                     -v /lib/modules:/lib/modules \
-                    mywireguard /bin/bash
+                    benzj/wireguard_with_webcontro  /bin/bash
 
 #执行完毕后删除刚才的初始化容器
 docker rm wireguardinit
@@ -38,7 +38,7 @@ docker run -it -d --cap-add=NET_ADMIN \
                     -p 23333:51820/udp \
                     -v /lib/modules:/lib/modules \
                     -v $PWD/config:/etc/wireguard \
-                    mywireguard  
+                    benzj/wireguard_with_webcontrol  
 ```
 
 
@@ -51,7 +51,7 @@ docker run          --cap-add=NET_ADMIN \
                     --name=wireguardinit \
                     -v  /usr/src:/usr/src \
                     -v /lib/modules:/lib/modules \
-                    benzj/mywireguard /bin/bash install-module
+                    benzj/wireguard_with_webcontrol ./install-module
 
 #执行完毕后删除刚才的初始化容器
 docker rm wireguardinit
@@ -65,7 +65,7 @@ docker run -it -d --cap-add=NET_ADMIN \
                     -p 9999:9000/tcp \
                     -v /lib/modules:/lib/modules \
                     -v $PWD/config:/etc/wireguard \
-                    benzj/mywireguard     
+                    benzj/wireguard_with_webcontrol
 ```
 
 # config挂载文件夹说明
