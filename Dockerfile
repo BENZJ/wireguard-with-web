@@ -11,6 +11,7 @@ apt install  -y --no-install-recommends \
         iptables \
         net-tools  && \
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf  &&\
+echo "net.ipv6.ip_forward=1" >> /etc/sysctl.conf  &&\
 sysctl -p &&\
 echo "**** install golang ****" && \
 wget https://golang.org/dl/go1.15.2.linux-amd64.tar.gz &&\

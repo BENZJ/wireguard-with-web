@@ -1,2 +1,2 @@
 .DS_Store
-config/wg0.conf
+config/*.conf
