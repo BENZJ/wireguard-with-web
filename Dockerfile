@@ -18,10 +18,10 @@ wget https://golang.org/dl/go1.15.2.linux-amd64.tar.gz &&\
 tar -C /usr/local -xzf go1.15.2.linux-amd64.tar.gz &&\
 rm go1.15.2.linux-amd64.tar.gz && \
 mkdir /root/go
-ENV     GOPATH=/root/go \
-        PATH=${PATH}:/usr/local/go/bin\
-        PATH=${PATH}:${GOPATH}/bin \
-        PATH=${PATH}:/script
+ENV GOPATH=/root/go 
+ENV PATH=${PATH}:/usr/local/go/bin
+ENV PATH=${PATH}:${GOPATH}/bin 
+ENV PATH=${PATH}:/script
 COPY entrypoint.sh /script/entrypoint.sh
 COPY install-module /script/install-module
 
